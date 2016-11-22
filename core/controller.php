@@ -1,6 +1,8 @@
 <?php
 class controller {
     
+    
+    
     public function __construct(){
         
     }
@@ -11,6 +13,8 @@ class controller {
     }
 
     public function loadTemplate($viewName, $viewData = array()){
+        $c = new Categoria();
+        $menu = $c->getCategorias();
         include 'views/template.php';
     }
 

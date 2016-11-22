@@ -5,12 +5,13 @@ class homeController extends controller {
         parent::__construct();
     }
     public function index() {
-        $mvc = array(
-            "nome" => "MVC",
-            "modelo" => "Padrão"
-        );
+        $dados = array();
         
-        $dados['mvc'] = $mvc;
+        
+        
+        $p = new Produto();
+        $dados['produtos'] = $p->listProdutos(8);
+        
         $this->loadTemplate('home', $dados);
     }
     

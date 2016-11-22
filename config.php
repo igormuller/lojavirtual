@@ -12,7 +12,7 @@ if (ENVIRONMENT == "development") {
 	$config['dbuser'] = 'root';
 	$config['dbpass'] = '';
         
-        define("BASE_URL","http://localhost/lojavirtual");
+        define("BASE_URL","http://lojavirtual.pc");
 } else {
 	$config['dbname'] = 'loja';
 	$config['host'] = 'localhost';

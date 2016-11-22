@@ -43,11 +43,17 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Deals</a></li>
-                    <li><a href="#">Stores</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li class=""><a href="<?php echo BASE_URL; ?>">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($menu as $menuitem): ?>
+                            <li><a href="<?php echo BASE_URL."/categoria/ver/".$menuitem['id']; ?>"><?php echo $menuitem['titulo']; ?></a></li>
+                            <?php endforeach; ?>                            
+                        </ul>                           
+                    </li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Your Account</a></li>
@@ -64,6 +70,6 @@
         <p>Loja Virtual Copyright</p>
         <a href="http://www.idmweb.com.br" class="text-success">Desenvolvido por IDMWeb - Soluções</a>
     </footer>
-
+    <script src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
 </body>
 </html>

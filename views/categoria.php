@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+        <h1><?php echo $categoria;?></h1><br/>
         <?php foreach ($produtos as $produto): ?>
         <div class="col-sm-4">
             <a href="<?php echo BASE_URL."/produto/ver/".$produto['id']; ?>">
@@ -14,5 +15,5 @@
             </a>
         </div>
         <?php endforeach; ?>
-  </div>
-</div><br>
+    </div>
+</div>
