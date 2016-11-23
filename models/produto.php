@@ -30,4 +30,25 @@ class Produto extends model {
         return $produtos;
     }
     
+    public function getProdutoId($id) {
+        $prod = array();
+        $sql = "SELECT * FROM produto WHERE id = '$id'";
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0){
+            $prod = $sql->fetch();
+        }
+        return $prod;
+    }
+    
+    public function getProdutosArray($produtos) {
+        $dados = array();
+        $sql = "SELECT * FROM produto WHERE id IN (".implode(",", $produtos).")";
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0){
+            $dados = $sql->fetchAll();
+        }
+        return $dados;
+        
+    }
+    
 }
