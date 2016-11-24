@@ -3,13 +3,16 @@
 class carrinhoController extends controller {
     
     public function index() {
-        $dados = array();
+        $dados = array(
+            'produtos' => ''
+        );
         if (isset($_SESSION['carrinho'])){
             $produtos = $_SESSION['carrinho'];
+            if (count($produtos) > 0){
+                $p = new Produto();
+                $dados['produtos'] = $p->getProdutosArray($produtos);
+            }
         }
-        
-        $p = new Produto();
-        $dados['produtos'] = $p->getProdutosArray($produtos);
         
         $this->loadTemplate('carrinho', $dados);
         
@@ -25,5 +28,19 @@ class carrinhoController extends controller {
         }
         
         header("Location: /carrinho");
+    }
+    
+    public function del($id) {
+        
+        if (!empty($id)){
+            foreach ($_SESSION['carrinho'] as $cchave => $cvalor){
+                if ($id == $cvalor){
+                    unset($_SESSION['carrinho'][$cchave]);
+                }
+            }
+        }
+        
+        header("Location: /carrinho");
+        
     }
 }

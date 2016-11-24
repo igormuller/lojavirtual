@@ -16,6 +16,8 @@
     /* Remove the jumbotron's default bottom margin */ 
      .jumbotron {
       margin-bottom: 0;
+      padding: 10px;
+      height: 250px;
     }
    
     /* Add a gray background color and some padding to the footer */
@@ -26,11 +28,8 @@
     </style>
 </head>
 <body>
-    <div class="jumbotron">
-        <div class="container text-center">
-            <h1>Loja Virtual</h1>      
-            <p>Projeto PHP do Zero ao Profissional</p>
-        </div>
+    <div class="jumbotron text-center">
+        <img src="/assets/images/logoFinal.png">
     </div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -56,7 +55,13 @@
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Your Account</a></li>
+                    <li>
+                        <a href="/carrinho"><img src="/assets/images/carrinho.png" width="24" height="24">
+                            <span class="badge">
+                                <?php echo (isset($_SESSION['carrinho']))? count($_SESSION['carrinho']) : '0'; ?>
+                            </span>
+                        </a>
+                    </li>
                     <li><a href="#">Cart</a></li>
                 </ul>
             </div>
