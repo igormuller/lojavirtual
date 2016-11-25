@@ -2,6 +2,10 @@
 
 class Categoria extends model {
     
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function getCategorias() {
         $dados = array();
         

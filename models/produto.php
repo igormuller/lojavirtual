@@ -2,6 +2,10 @@
 
 class Produto extends model {
     
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function listProdutos($limit = 0) {
         $sql = "SELECT * FROM produto";
         

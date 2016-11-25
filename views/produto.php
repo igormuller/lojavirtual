@@ -7,7 +7,7 @@
             <h2><?php echo utf8_encode($produto['nome']); ?></h2>
             <span><?php echo utf8_encode($produto['descricao']); ?></span><br/>
             <span>R$ <?php echo utf8_encode($produto['preco']); ?></span><br/><br/>
-            <a href="/carrinho/add/<?php echo $produto['id']; ?>" class="btn btn-success">Adicionar ao Carrinho</a>
+            <a href="<?php echo BASE_URL; ?>/carrinho/add/<?php echo $produto['id']; ?>" class="btn btn-success">Adicionar ao Carrinho</a>
         </div>
     </div>
 </div>

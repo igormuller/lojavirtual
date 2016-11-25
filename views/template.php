@@ -29,7 +29,7 @@
 </head>
 <body>
     <div class="jumbotron text-center">
-        <img src="/assets/images/logoFinal.png">
+        <img src="<?php echo BASE_URL; ?>/assets/images/LogoFinal.png">
     </div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -56,7 +56,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/carrinho"><img src="/assets/images/carrinho.png" width="24" height="24">
+                        <a href="<?php echo BASE_URL; ?>/carrinho"><img src="<?php echo BASE_URL; ?>/assets/images/carrinho.png" width="24" height="24">
                             <span class="badge">
                                 <?php echo (isset($_SESSION['carrinho']))? count($_SESSION['carrinho']) : '0'; ?>
                             </span>
