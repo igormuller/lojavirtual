@@ -17,13 +17,6 @@ class Venda extends model {
         $status = '1';
         $link = '';
         
-        if ($pg = '1'){ //cortesia 
-            $status = '2'; //compra aprovada
-            $link = BASE_URL."/carrinho/obrigado";
-        } else {
-            
-        }
-        
         $sql = "INSERT INTO venda SET "
                 . "id_usuario = $uid,"
                 . "endereco = '$endereco',"
@@ -34,6 +27,31 @@ class Venda extends model {
         
         $this->db->query($sql);
         $id_venda = $this->db->lastInsertId();
+        if ($pg == '1'){ //cortesia 
+            $status = '2'; //compra aprovada
+            $link = BASE_URL."/carrinho/obrigado";
+            $this->db->query("UPDATE venda SET status_pg = '$status' WHERE id_venda = '$id_venda'");
+            
+        } else if ($pg == '2') { //PagSeguro
+            require 'libraries/PagSeguroLibrary/PagSeguroLibrary.php';
+            
+            $paymanetRequest = new PagSeguroPaymentRequest();
+            foreach ($produtos as $produto) {
+                $paymanetRequest->addItem($produto['id'], $produto['nome'], 1, $produto['preco']);
+            }
+            $paymanetRequest->setCurrency("BRL");
+            $paymanetRequest->setReference($id_venda);
+            $paymanetRequest->setRedirectURL("http://lojavirtual.pc/carrinho/obrigado");
+            $paymanetRequest->addParameter("notificationURL", "http://lojavirtual.pc/carrinho/notificacao");
+            
+            try {
+                $cred = PagSeguroConfig::getAccountCredentials();
+                $link = $paymanetRequest->register($cred);
+            } catch (PagSeguroServiceException $e) {
+                $e->getMessage();
+            }
+            
+        }
         
         foreach ($produtos as $produto) {
             
