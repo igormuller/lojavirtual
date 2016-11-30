@@ -6,6 +6,48 @@ class Venda extends model {
         parent::__construct();
     }
     
+    public function getPedidoUsuario($id_usuario) {
+        $array = array();
+        if (!empty($id_usuario)){
+            $sql = "SELECT *,(SELECT pagamento.nome FROM pagamento WHERE pagamento.id = venda.forma_pg) as tipo_pg FROM venda WHERE id_usuario = ".$id_usuario;
+            $sql = $this->db->query($sql);
+            
+            if ($sql->rowCount() > 0){
+                $array = $sql->fetchAll();
+            }
+        }
+        return $array;
+    }
+    
+    public function getPedido($id_pedido, $id_usuario) {
+        $array = array();
+        $sql = "SELECT *, (SELECT pagamento.nome FROM pagamento WHERE pagamento.id = venda.forma_pg) as tipo_pg FROM venda WHERE id = '$id_pedido' AND id_usuario = ".$id_usuario;
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+            $array['produtos'] = $this->getProdutosPedido($id_pedido);
+        }
+        return $array;
+    }
+    
+    public function getProdutosPedido($id_pedido) {
+        $array = array();
+        $sql = "SELECT "
+                . "venda_produto.quantidade,"
+                . "venda_produto.id_produto,"
+                . "produto.nome,"
+                . "produto.imagem,"
+                . "produto.preco "
+                . "FROM venda_produto"
+                . " LEFT JOIN produto ON (venda_produto.id_produto = produto.id)"
+                . " WHERE venda_produto.id_venda = '$id_pedido'";
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetchAll();
+        }
+        return $array;
+    }
+    
     public function setVenda($uid, $endereco, $valor, $pg, $produtos) {
         
         /*
@@ -28,9 +70,9 @@ class Venda extends model {
         $this->db->query($sql);
         $id_venda = $this->db->lastInsertId();
         if ($pg == '1'){ //cortesia 
-            $status = '2'; //compra aprovada
+            $status = 2; //compra aprovada
             $link = BASE_URL."/carrinho/obrigado";
-            $this->db->query("UPDATE venda SET status_pg = '$status' WHERE id_venda = '$id_venda'");
+            $this->db->query("UPDATE venda SET status_pg = 2 WHERE id = $id_venda");
             
         } else if ($pg == '2') { //PagSeguro
             require 'libraries/PagSeguroLibrary/PagSeguroLibrary.php';

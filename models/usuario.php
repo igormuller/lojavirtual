@@ -23,6 +23,18 @@ class Usuario extends model {
         }
     }
     
+    public function getNome($id) {
+        $nome = '';
+        $sql = "SELECT nome FROM usuario WHERE id = ".$id;
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0) {
+            $sql = $sql->fetch();
+            $nome = $sql['nome'];
+        }
+        return $nome;
+        
+    }
+    
     public function criarUsuario($nome, $email, $senha) {
         
         $sql = "INSERT INTO usuario SET nome = '$nome', email = '$email', senha = MD5('$senha')";

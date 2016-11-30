@@ -62,7 +62,7 @@
                             </span>
                         </a>
                     </li>
-                    <li><a href="#">Cart</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/pedidos">Pedidos</a></li>
                 </ul>
             </div>
         </div>
