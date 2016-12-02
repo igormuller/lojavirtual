@@ -63,6 +63,7 @@
                         </a>
                     </li>
                     <li><a href="<?php echo BASE_URL; ?>/pedidos">Pedidos</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/painel">Admin</a></li>
                 </ul>
             </div>
         </div>
