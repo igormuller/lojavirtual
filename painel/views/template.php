@@ -37,7 +37,6 @@
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
-                    
                     <li>
                         <a href="/">Loja</a>
                     </li>
@@ -57,9 +56,13 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li>
-                            <a href="/painel/">Home Painel</a>
-                        </li>
+                        <li><a href="/painel/">Home Painel</a></li>
+                        <li><a href="/painel/categoria">Categoria</a></li>
+                        <li><a href="/painel/produto">Produto</a></li>
+                        <li><a href="/painel/pagamento">Pagamento</a></li>
+                        <li><a href="/painel/venda">Venda</a></li>
+                        <li><a href="/painel/usuario">Usuário</a></li>
+                        <li><a href="/painel/admin">Admin</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
