@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Nome:</label>
             <div class="col-sm-8">
-                <input type="text" name="nome" value="<?php echo utf8_encode($produto['nome']); ?>" class="form-control" />
+                <input type="text" name="nome" value="<?php echo $produto['nome']; ?>" class="form-control" />
             </div>
         </div>
         <div class="form-group">
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Descrição:</label>
             <div class="col-sm-8">
-                <textarea name="descricao" class="form-control"><?php echo utf8_encode($produto['descricao']); ?></textarea>
+                <textarea name="descricao" class="form-control"><?php echo $produto['descricao']; ?></textarea>
             </div>
         </div>
         <div class="form-group">

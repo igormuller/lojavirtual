@@ -24,7 +24,7 @@
                     <tr>
                         <td><?php echo $pedido['id']; ?></td>
                         <td><?php echo $pedido['valor']; ?></td>
-                        <td><?php echo utf8_encode($pedido['tipo_pg']); ?></td>
+                        <td><?php echo $pedido['tipo_pg']; ?></td>
                         <td><?php echo $config['status_pg'][$pedido['status_pg']]; ?></td>
                         <td><a class="btn btn-info" href="/pedidos/ver/<?php echo $pedido['id']; ?>">+</a></td>
                     </tr>

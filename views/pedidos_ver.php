@@ -15,7 +15,7 @@
                     <tr>
                         <td><?php echo $pedido['id']; ?></td>
                         <td><?php echo $pedido['valor']; ?></td>
-                        <td><?php echo utf8_encode($pedido['tipo_pg']); ?></td>
+                        <td><?php echo $pedido['tipo_pg']; ?></td>
                         <td><?php echo $config['status_pg'][$pedido['status_pg']]; ?></td>
                     </tr>
                 </tbody>
@@ -35,7 +35,7 @@
                     <?php foreach ($pedido['produtos'] as $produto): ?>
                     <tr>
                         <td><img src="<?php echo BASE_URL; ?>/assets/images/produto/<?php echo $produto['imagem']; ?>" width="60" height="60" ></td>
-                        <td><?php echo utf8_encode($produto['nome']); ?></td>
+                        <td><?php echo $produto['nome']; ?></td>
                         <td>R$ <?php echo $produto['preco']; ?></td>
                         <td><?php echo $produto['quantidade']; ?></td>
                     </tr>

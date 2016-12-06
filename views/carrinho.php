@@ -20,7 +20,7 @@
                     <?php foreach ($produtos as $produto): ?>
                     <tr>
                         <td><img src="<?php echo BASE_URL; ?>/assets/images/produto/<?php echo $produto['imagem']; ?>" width="60" height="60" ></td>
-                        <td><?php echo utf8_encode($produto['nome']); ?></td>
+                        <td><?php echo $produto['nome']; ?></td>
                         <td>R$ <?php echo $produto['preco'] ?></td>
                         <td><a href="<?php echo BASE_URL; ?>/carrinho/del/<?php echo $produto['id']; ?>" class="btn-sm btn-danger">Excluir</a></td>
                     </tr>

@@ -16,11 +16,11 @@
         <?php foreach ($produtos as $produto): ?>
         <tr>
             <td><img src="../assets/images/produto/<?php echo $produto['imagem']; ?>" width="60"/></td>
-            <td><?php echo utf8_encode($produto['nome']); ?></td>
+            <td><?php echo $produto['nome']; ?></td>
             <td>R$ <?php echo $produto['preco']; ?></td>
             <td><?php echo $produto['quantidade']; ?></td>
-            <td><?php echo utf8_encode($produto['descricao']); ?></td>
-            <td><?php echo utf8_encode($produto['categoria']); ?></td>
+            <td><?php echo $produto['descricao']; ?></td>
+            <td><?php echo $produto['categoria']; ?></td>
             <td>
                 <a href="/painel/produto/edit/<?php echo $produto['id']; ?>" class="btn btn-sm btn-default">Editar</a>
                 <a href="/painel/produto/remove/<?php echo $produto['id']; ?>" class="btn btn-sm btn-default">Excluir</a>

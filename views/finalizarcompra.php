@@ -50,7 +50,7 @@
                     <div class="panel-body">
                         <?php foreach ($pagamentos as $pg): ?>
                         <div class="radio">
-                            <label class="radio"><input type="radio" name="pg" value="<?php echo $pg['id'] ?>" /><?php echo utf8_encode($pg['nome']); ?></label>
+                            <label class="radio"><input type="radio" name="pg" value="<?php echo $pg['id'] ?>" /><?php echo $pg['nome']; ?></label>
                         </div>
                         <?php endforeach; ?>
                         <p>Total: <?php echo $total; ?></p>
