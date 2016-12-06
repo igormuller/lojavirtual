@@ -15,7 +15,7 @@
     <tbody>
         <?php foreach ($produtos as $produto): ?>
         <tr>
-            <td><img src="/assets/images/produto/<?php echo $produto['imagem']; ?>" width="60"/></td>
+            <td><img src="../assets/images/produto/<?php echo $produto['imagem']; ?>" width="60"/></td>
             <td><?php echo utf8_encode($produto['nome']); ?></td>
             <td>R$ <?php echo $produto['preco']; ?></td>
             <td><?php echo $produto['quantidade']; ?></td>
@@ -32,5 +32,7 @@
 <?php
 $conta = ceil($total_produtos / $limit_produtos);
 for ($q=0; $q<$conta;$q++): ?>
-<a href="/painel/produto?p=<?php echo $q+1; ?>"><?php echo $q+1; ?></a>
+<ul class="pagination">
+    <li><a href="/painel/produto?p=<?php echo $q+1; ?>"><?php echo $q+1; ?></a></li>
+</ul>
 <?php endfor; ?>
