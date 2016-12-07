@@ -3,7 +3,6 @@ class homeController extends controller {
     
     public function __construct() {
         parent::__construct();
-        
         $adm = new Admin();
         if (!$adm->isLogged()){
             header("Location: /painel/login");

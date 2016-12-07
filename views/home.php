@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <?php foreach ($produtos as $produto): ?>
-        <div class="col-sm-3">
+        <div class="col-md-3">
             <a href="<?php echo BASE_URL."/produto/ver/".$produto['id']; ?>">
                 <div class="panel panel-primary">
                     <div class="panel-heading"><?php echo $produto['nome']; ?></div>

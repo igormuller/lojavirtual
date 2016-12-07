@@ -2,6 +2,14 @@
 
 class categoriaController extends controller {
     
+    public function __construct() {
+        parent::__construct();
+        $adm = new Admin();
+        if (!$adm->isLogged()){
+            header("Location: /painel/login");
+        }
+    }
+    
     public function index() {
         $dados = array();
         $c = new Categoria();

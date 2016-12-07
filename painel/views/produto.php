@@ -15,7 +15,7 @@
     <tbody>
         <?php foreach ($produtos as $produto): ?>
         <tr>
-            <td><img src="../assets/images/produto/<?php echo $produto['imagem']; ?>" width="60"/></td>
+            <td><img src="/assets/images/produto/<?php echo $produto['imagem']; ?>" width="60"/></td>
             <td><?php echo $produto['nome']; ?></td>
             <td>R$ <?php echo $produto['preco']; ?></td>
             <td><?php echo $produto['quantidade']; ?></td>

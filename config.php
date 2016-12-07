@@ -6,7 +6,7 @@ global $config;
 $config = array();
 
 if (ENVIRONMENT == "development") {
-	$config['dbname'] = 'loja';
+	$config['dbname'] = 'lojavirtual';
 	$config['host'] = 'localhost';
         $config['charset'] = 'utf8';
 	$config['dbuser'] = 'root';

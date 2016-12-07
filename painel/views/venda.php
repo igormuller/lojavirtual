@@ -20,8 +20,8 @@
             <td><?php echo $venda['pgto']; ?></td>
             <td><?php echo $config['status_pg'][$venda['status_pg']]; ?></td>
             <td>
-                <a href="#" class="btn btn-sm btn-default">+</a>
-                <a href="#" class="btn btn-sm btn-default">-</a>
+                <a href="/painel/venda/ver/<?php echo $venda['id']; ?>" class="btn btn-sm btn-default">+</a>
+                <a href="/painel/venda/excluir/<?php echo $venda['id']; ?>" class="btn btn-sm btn-default">-</a>
             </td>
         </tr>
         <?php endforeach; ?>

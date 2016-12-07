@@ -3,9 +3,9 @@
         <title>.: Login Painel :.</title>
         <link href="<?php echo BASE_URL_ADM; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
     </head>
-    <body style="margin-top: 100px;">
+    <body style="margin-top: 100px; background-image: url(/painel/assets/images/fundologin.jpg);">
         <div class="container">
-            <div class="row vertical-offset-100">
+            <div class="row">
                 <?php if (!empty($aviso)): ?>
                 <div class="alert alert-warning text-center">
                     <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -14,8 +14,8 @@
                 <?php endif; ?>
                 <div class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Login Loja Virtual</h3>
+                        <div class="panel-heading text-center">
+                            <span class="panel-title">Login Loja Virtual</span>
                         </div>
                         <div class="panel-body">
                             <form method="POST">

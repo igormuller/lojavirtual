@@ -1,11 +1,7 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <?php if(!empty($erro)): ?>
-            <span class="text-danger"><?php echo $erro; ?></span>
-            <?php endif; ?>
-        </div>
-        <form method="POST" class="form-horizontal">
+<form method="POST" class="form-horizontal" id="form">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-success text-center">Finalizar compra</h1>
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Informações do Usuário</div>
@@ -28,6 +24,12 @@
                                 <input type="password" name="senha" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Fone:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="telefone" class="form-control" id="telefone">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,9 +38,58 @@
                     <div class="panel-heading">Informações de Endereço</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Endereço:</label>
-                            <div class="col-sm-9">
-                                <textarea name="endereco" class="form-control"></textarea>
+                            <label class="control-label col-sm-2">CEP:</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="endereco[cep]" class="form-control" id="cep">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Rua:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="endereco[rua]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nº:</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="endereco[num]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Comp.:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="endereco[comp]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Bairro:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="endereco[bairro]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Cidade:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="endereco[cidade]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Estado:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="endereco[estado]" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Resumo da Compra</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Total:</label>
+                            <div class="col-sm-10">
+                                <?php echo $total; ?>
                             </div>
                         </div>
                     </div>
@@ -48,18 +99,44 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Informações de Pagamento</div>
                     <div class="panel-body">
-                        <?php foreach ($pagamentos as $pg): ?>
-                        <div class="radio">
-                            <label class="radio"><input type="radio" name="pg" value="<?php echo $pg['id'] ?>" /><?php echo $pg['nome']; ?></label>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Forma Pgto:</label>
+                            <div class="col-sm-10">
+                                <select name="pg_form" id="pg_form" class="form-control" onchange="selectPg()">
+                                    <option value="">Selecione...</option>
+                                    <option value="CREDIT_CARD">Cartão de Crédito</option>
+                                    <option value="BOLETO">Boleto</option>
+                                    <option value="BALANCE">Saldo PagSeguro</option>
+                                </select>
+                            </div>
                         </div>
-                        <?php endforeach; ?>
-                        <p>Total: <?php echo $total; ?></p>
+                        <div class="form-group" id="cc" style="display: none">
+                            <div class="col-sm-12" id="bandeira">
+                                <input type="radio" name="bcc" value="visa"><img src="/assets/images/credit/visa.png" width="32" height="32">
+                                <input type="radio" name="bcc" value="master"><img src="/assets/images/credit/mastercard.png" width="32" height="32">
+                                <input type="radio" name="bcc" value="american"><img src="/assets/images/credit/american-express.png" width="32" height="32">                                                
+                            </div>
+                        </div>
+                        <div class="form-group" id="cardinfo" style="display: none">
+                            Parcelamento:
+                            Titular:
+                            CPF:
+                            numero do cartão
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <button class="btn btn-success">Finalizar Pedido</button>
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">            
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <button class="btn btn-lg btn-success btn-block">Finalizar Pedido</button>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</form>
+
