@@ -111,11 +111,7 @@
                             </div>
                         </div>
                         <div class="form-group" id="cc" style="display: none">
-                            <div class="col-sm-12" id="bandeira">
-                                <input type="radio" name="bcc" value="visa"><img src="/assets/images/credit/visa.png" width="32" height="32">
-                                <input type="radio" name="bcc" value="master"><img src="/assets/images/credit/mastercard.png" width="32" height="32">
-                                <input type="radio" name="bcc" value="american"><img src="/assets/images/credit/american-express.png" width="32" height="32">                                                
-                            </div>
+                            <div class="col-sm-12" id="bandeiras"></div>
                         </div>
                         <div class="form-group" id="cardinfo" style="display: none">
                             Parcelamento:
@@ -138,5 +134,16 @@
             <div class="col-lg-3"></div>
         </div>
     </div>
+    <input type="hidden" name="bandeira" id="bandeira" />
+    <input type="hidden" name="ctoken" id="ctoken" />
+    <input type="hidden" name="shash" id="shash" />
+    <input type="hidden" name="sessionId" value="<?php echo $sessionId; ?>" />
 </form>
 
+<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+<script type="text/javascript">
+    var sessionId = '<?php echo $sessionId; ?>';
+    var valor = '<?php echo $total; ?>';
+    var formOk = false;
+</script>
+<script type="text/javascript" src="/assets/js/ckt.js"></script>
