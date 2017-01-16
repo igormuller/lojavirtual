@@ -1,4 +1,4 @@
-<form method="POST" class="form-horizontal" id="form">
+<form method="POST" class="form-horizontal" id="form" onsubmit="return pagar()">
     <div class="container">
         <div class="row">
             <h1 class="text-success text-center">Finalizar compra</h1>
@@ -22,12 +22,6 @@
                             <label class="control-label col-sm-2">Senha:</label>
                             <div class="col-sm-10">
                                 <input type="password" name="senha" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">Fone:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="telefone" class="form-control" id="telefone">
                             </div>
                         </div>
                     </div>
@@ -89,7 +83,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">Total:</label>
                             <div class="col-sm-10">
-                                <?php echo $total; ?>
+                                R$ <?php echo $total; ?>
                             </div>
                         </div>
                     </div>
@@ -100,8 +94,8 @@
                     <div class="panel-heading">Informações de Pagamento</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Forma Pgto:</label>
-                            <div class="col-sm-10">
+                            <label class="control-label col-sm-3">Forma Pgto:</label>
+                            <div class="col-sm-9">
                                 <select name="pg_form" id="pg_form" class="form-control" onchange="selectPg()">
                                     <option value="">Selecione...</option>
                                     <option value="CREDIT_CARD">Cartão de Crédito</option>
@@ -114,10 +108,30 @@
                             <div class="col-sm-12" id="bandeiras"></div>
                         </div>
                         <div class="form-group" id="cardinfo" style="display: none">
-                            Parcelamento:
-                            Titular:
-                            CPF:
-                            numero do cartão
+                            <label class="control-label col-sm-3">Parcelas:</label>
+                            <div class="col-sm-9">
+                                <select name="parc" id="parc" class="form-control"></select>
+                            </div>
+                            <label class="control-label col-sm-3">Titular:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-sm-3">CPF:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-sm-3">Cartão:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="cartao"/>
+                            </div>
+                            <label class="control-label col-sm-3">CVV:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="cvv" />
+                            </div>
+                            <label class="control-label col-sm-2">Validade:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="validade"/>
+                            </div>
                         </div>
                     </div>
                 </div>

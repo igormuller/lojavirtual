@@ -64,7 +64,31 @@ class carrinhoController extends controller {
         }
         
         if (isset($_POST['pg_form']) && !empty($_POST['pg_form'])) {
+            $nome = addslashes($_POST['nome']);
+            $email = addslashes($_POST['email']);
+            $senha = addslashes($_POST['senha']);
+            $sessionId = addslashes($_POST['sessionId']);
             
+            if (!empty($email) && !empty($senha)) {
+                $uid = 0;
+                $u = new Usuario();
+                if ($u->isExiste($email)){
+                    if ($u->isExiste($email, $senha)){
+                        $uid = $u->getId($email);
+                    } else {
+                        $dados['erro'] = "Usuário e/ou senha errados!";
+                    }
+                } else {
+                    $uid = $u->criarUsuario($nome, $email, $senha);
+                }
+                
+                if ($uid > 0) {
+                    $vendas = new Venda();
+                    $venda = $vendas->setCkTransparente();
+                }
+            } else {
+                $dados['erro'] = "Preencha todos os Campos";
+            }
         } else {
             try {
                 $credentials = PagSeguroConfig::getAccountCredentials();
