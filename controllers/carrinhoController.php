@@ -84,7 +84,8 @@ class carrinhoController extends controller {
                 
                 if ($uid > 0) {
                     $vendas = new Venda();
-                    $venda = $vendas->setCkTransparente();
+                    $venda = $vendas->setVendaCkTransparente($_POST, $uid, $sessionId, $dados['produtos'], $dados['total']);
+                    
                 }
             } else {
                 $dados['erro'] = "Preencha todos os Campos";

@@ -24,6 +24,15 @@
                                 <input type="password" name="senha" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Telefone:</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="ddd" class="form-control" maxlength="2">
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" name="telefone" class="form-control" maxlength="9">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,23 +123,23 @@
                             </div>
                             <label class="control-label col-sm-3">Titular:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" name="titular" class="form-control" />
                             </div>
                             <label class="control-label col-sm-3">CPF:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" name="cpf" class="form-control" />
                             </div>
                             <label class="control-label col-sm-3">Cartão:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="cartao"/>
+                                <input type="text" class="form-control" name="cartao" id="cartao"/>
                             </div>
                             <label class="control-label col-sm-3">CVV:</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="cvv" />
+                                <input type="text" class="form-control" name="cvv" id="cvv" />
                             </div>
                             <label class="control-label col-sm-2">Validade:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="validade"/>
+                                <input type="text" class="form-control" name="validade" id="validade"/>
                             </div>
                         </div>
                     </div>

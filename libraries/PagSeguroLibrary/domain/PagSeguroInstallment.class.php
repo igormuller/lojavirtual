@@ -80,6 +80,14 @@ class PagSeguroInstallment
             );
         }
     }
+    
+    public function getValue() {
+        return $this->getInstallmentAmount();
+    }
+    
+    public function getNoInterestInstallmentQuantity() {
+        return null;
+    }
 
     /***
      * Set brand of credit card

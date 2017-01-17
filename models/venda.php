@@ -108,4 +108,124 @@ class Venda extends model {
         unset($_SESSION['carrinho']);
         return $link;
     }
+    
+    public function setVendaCkTransparente($params, $uid, $sessionId, $prods, $subtotal) {
+        require 'libraries/PagSeguroLibrary/PagSeguroLibrary.php';
+        
+        /*
+         * Status da compra
+         * 1 - Compra aguardando pagamento
+         * 2 - Compra aprovada
+         * 3 - Compra cancelada
+         */
+        $status = '1';
+        $link = '';
+        $endereco = implode(', ', $params['endereco']);
+        $sql = "INSERT INTO venda SET "
+                . "id_usuario = $uid,"
+                . "endereco = '$endereco',"
+                . "valor = '$subtotal',"
+                . "forma_pg = '4',"
+                . "status_pg = $status,"
+                . "pg_link = '$sessionId'";
+        
+        $this->db->query($sql);
+        $id_venda = $this->db->lastInsertId();
+        
+        foreach ($prods as $prod) {
+            
+            $sql = "INSERT INTO venda_produto SET "
+                    . "id_venda = $id_venda,"
+                    . "id_produto = ".$prod['id'].","
+                    . "quantidade = 1";
+            $this->db->query($sql);
+            
+        }
+        
+        unset($_SESSION['carrinho']);
+        
+        $directPaymentRequest = new PagSeguroDirectPaymentRequest();
+        $directPaymentRequest->setPaymentMode('DEFAULT');
+        $directPaymentRequest->setPaymentMethod($params['pg_form']);
+        $directPaymentRequest->setReference($id_venda);
+        $directPaymentRequest->setCurrency("BRL");
+        $directPaymentRequest->addParameter("notificationURL", "http://lojavirtual.pc/carrinho/notificacao");
+        
+        foreach ($prods as $prod) {
+            $directPaymentRequest->addItem($prod['id'], $prod['nome'], 1, $prod['preco']);
+        }
+        
+        $directPaymentRequest->setSender(
+                $params['nome'],
+                $params['email'],
+                $params['ddd'],
+                $params['telefone'],
+                'CPF',
+                $params['cpf']                
+                );
+        
+        $directPaymentRequest->setSenderHash($params['shash']);
+        $directPaymentRequest->setShippingType(3);
+        $directPaymentRequest->setShippingCost(0);
+        $directPaymentRequest->setShippingAddress(
+                $params['endereco']['cep'],
+                $params['endereco']['rua'],
+                $params['endereco']['numero'],
+                $params['endereco']['comp'],
+                $params['endereco']['bairro'],
+                $params['endereco']['cidade'],
+                $params['endereco']['estado'],
+                'BRA'
+        );
+        $billingAddress = new PagSeguroBilling(
+                array(
+                    'postalCode' => $params['endereco']['cep'],
+                    'street' => $params['endereco']['rua'],
+                    'number' => $params['endereco']['numero'],
+                    'complement' => $params['endereco']['comp'],
+                    'district' => $params['endereco']['bairro'],
+                    'city' => $params['endereco']['cidade'],
+                    'state' => $params['endereco']['estado'],
+                    'country' => 'BRA'
+                )
+        );
+        
+        if ($params['pg_form'] == 'CREDIT_CARD') {
+            $parc = explode(';', $params['parc']);
+            $installments = new PagSeguroInstallment(
+                    '',
+                    $parc[0],
+                    $parc[1],
+                    '',
+                    ''
+            );
+            $creditCardData = new PagSeguroCreditCardCheckout(
+                array(
+                    'token' => $params['ctoken'],
+                    'installment' => $installments,
+                    'billing' => $billingAddress,
+                    'holder' => new PagSeguroCreditCardHolder(
+                        array(
+                            'name' => $params['titular'],
+                            'birthDate' => date('01/10/1979'),
+                            'areaCode' => $params['ddd'],
+                            'number' => $params['telefone'],
+                            'documents' => array(
+                                'type' => 'CPF',
+                                'value' => $params['cpf']
+                            )
+                        )
+                    )
+                )
+            );
+            $directPaymentRequest->setCreditCard($creditCardData);
+        }
+        try {
+            $credentials = PagSeguroConfig::getAccountCredentials();
+            $r = $directPaymentRequest->register($credentials);
+            return $r;
+        } catch (PagSeguroServiceException $e) {
+            die($e->getMessage());
+        }
+    }
 }
