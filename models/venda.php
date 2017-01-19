@@ -229,6 +229,48 @@ class Venda extends model {
         }
     }
     
+    public function verificarVendas() {
+        require 'libraries/PagSeguroLibrary/PagSeguroLibrary.php';
+
+        $code = '';
+        $type = '';
+
+        if (isset($_POST['notificationCode']) && isset($_POST['notificationType'])) {
+            $code = trim($_POST['notificationCode']);
+            $type = trim($_POST['notificationType']);
+
+            $notificationType = new PagSeguroNotificationType($type);
+            $strType = $notificationType->getTypeFromValue();
+
+            $credentials = PagseguroConfig::getAccountCredentials();
+
+            try {
+                $transaction = PagSeguroNotificationService::checkTransaction($credentials, $code);
+                $ref = $transaction->getReference();
+                $status = $transaction->getStatus()->getValue();
+
+                $novoStatus = 0;
+                switch ($status) {
+                    case '1': // Aguardando Pgto.
+                    case '2': // Em análise
+                        $novoStatus = '1';
+                        break;
+                    case '3': // Paga
+                    case '4': // Disponível
+                        $novoStatus = '2';
+                    case '6': // Devolvida
+                    case '7': // Cancelada
+                        $novoStatus = '3';
+                        break;
+                }
+
+                $this->db->query("UPDATE vendas SET status_pg = '$novoStatus' WHERE id = '$ref'");
+            } catch (PagSeguroServiceException $e) {
+                echo "FALHA: " . $e->getMessage();
+            }
+        }
+    }
+
     public function setLinkBySession($link, $sessionId) {
         $this->db->query("UPDATE vendas SET pg_link = '$link' WHERE pg_link = '$sessionId'");
         
