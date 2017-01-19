@@ -170,7 +170,7 @@ class Venda extends model {
         $directPaymentRequest->setShippingAddress(
                 $params['endereco']['cep'],
                 $params['endereco']['rua'],
-                $params['endereco']['numero'],
+                $params['endereco']['num'],
                 $params['endereco']['comp'],
                 $params['endereco']['bairro'],
                 $params['endereco']['cidade'],
@@ -181,7 +181,7 @@ class Venda extends model {
                 array(
                     'postalCode' => $params['endereco']['cep'],
                     'street' => $params['endereco']['rua'],
-                    'number' => $params['endereco']['numero'],
+                    'number' => $params['endereco']['num'],
                     'complement' => $params['endereco']['comp'],
                     'district' => $params['endereco']['bairro'],
                     'city' => $params['endereco']['cidade'],
@@ -227,5 +227,10 @@ class Venda extends model {
         } catch (PagSeguroServiceException $e) {
             die($e->getMessage());
         }
+    }
+    
+    public function setLinkBySession($link, $sessionId) {
+        $this->db->query("UPDATE vendas SET pg_link = '$link' WHERE pg_link = '$sessionId'");
+        
     }
 }

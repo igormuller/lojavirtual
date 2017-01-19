@@ -86,6 +86,15 @@ class carrinhoController extends controller {
                     $vendas = new Venda();
                     $venda = $vendas->setVendaCkTransparente($_POST, $uid, $sessionId, $dados['produtos'], $dados['total']);
                     
+                    $tipo = $venda->getPaymentMethod()->getType()->getValue();
+                    if ($tipo == '3') { //Boleto
+                        $link = $venda->getPaymentLink();
+                        $vendas->setLinkBySession($link, $sessionId);
+                        header("Location: ".$link);
+                    } else {
+                        header("Location: /carrinho/obrigado");
+                    }
+                    
                 }
             } else {
                 $dados['erro'] = "Preencha todos os Campos";
@@ -103,6 +112,12 @@ class carrinhoController extends controller {
         $this->loadTemplate('finalizarcompra', $dados);
     }
     
+    public function notificacao() {
+        $vendas = new Venda();
+        $vendas->verificaVendas();
+    }
+
+
     public function obrigado() {
         $dados = array();
         $this->loadTemplate('obrigado', $dados);
